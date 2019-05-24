@@ -51,7 +51,8 @@ class ProductActionPage extends Component {
 
     onSave = (event) => {
         var {txtName, txtPrice, chkbStatus , id} = this.state;
-        var { history} = this.props;
+        var { history } = this.props;
+        //console.log(this.state);
 
         var product = {
             id: id,
@@ -135,7 +136,6 @@ const mapDispatchToProps = (dispatch, props) => {
         onUpdateProduct: (product) => {
             dispatch(actUpdateProductsRequest(product));
         }
-
     }
 }
 

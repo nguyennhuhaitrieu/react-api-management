@@ -18,7 +18,7 @@ class ProductListPage extends Component {
 
     render() {
         var { products } = this.props;
-        console.log(products);
+        //console.log(products);
         return (
             <div className="col-md-12">
                 <Link to="/product/add" className="btn btn-info mb-8">
