@@ -19,32 +19,23 @@ class ProductActionPage extends Component {
         var {match} = this.props;
         if (match) {
             var id = match.params.id;
-
-            /*callApi(`product/${id}`, 'GET', null).then(res => {
-                var data = res.data;
-                this.setState({
-                    id: data.id,
-                    txtName: data.name,
-                    txtPrice: data.price,
-                    chkbStatus: data.status,
-                })
-            });
-            */
-
-            this.props.onEditProduct(id); // Dùng React Redux onEditProduct (mapDispatchToProps)
+            this.props.onEditProduct(id);
         }
     }
 
+
     componentWillReceiveProps(nextProps) {
-        console.log('componentWillReceiveProps');
-        if(nextProps && nextProps.itemEditing) {
-            var { itemEditing } = nextProps;
+        this.updateProductItem(nextProps.products)
+    }
+    
+    updateProductItem(item) {
+        if(item !==null) {
             this.setState({
-                id : itemEditing.id,
-                txtName : itemEditing.name,
-                txtPrice : itemEditing.price,
-                chkbStatus : itemEditing.status
-            });
+                id : item.id,
+                txtName : item.name,
+                txtPrice : item.price,
+                chkbStatus : item.status
+            })
         }
     }
 
@@ -59,8 +50,6 @@ class ProductActionPage extends Component {
     }
 
     onSave = (event) => {
-        event.preventDefault();
-        //console.log(this.state);
         var {txtName, txtPrice, chkbStatus , id} = this.state;
         var { history} = this.props;
 
@@ -74,18 +63,10 @@ class ProductActionPage extends Component {
         if (id) { //update
             this.props.onUpdateProduct(product);
         } else {
-            /*callApi('product', 'POST', {
-                name: txtName,
-                price: txtPrice,
-                status: chkbStatus,
-            }).then(res => {
-                console.log(res);
-                history.goBack();
-            });
-            */
             this.props.onAddProduct(product); // Dùng React Redux 
         }
         history.goBack();
+        event.preventDefault();
     }
 
     render() {
@@ -137,7 +118,7 @@ class ProductActionPage extends Component {
 
 const mapStateToToProps = state => {
     return {
-        itemEditing: state.itemEditing,
+        products: state.products
     }
 }
 

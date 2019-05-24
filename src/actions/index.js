@@ -55,10 +55,10 @@ export const actGetProductsRequest = (id) => {
     };
 }
 
-export const actGetProduct = (product) => {
+export const actGetProduct = (dataProduct) => {
     return {
-        type: Types.EDIT_PRODUCTS,
-        product
+        type: Types.SHOW_DATA_EDIT_PRODUCTS,
+        dataProduct
     }
 }
 
@@ -66,6 +66,7 @@ export const actUpdateProductsRequest = (product) => {
     return (dispatch) => {
         return callApi(`product/${product.id}`, 'PUT', product).then(res =>{
             dispatch(actUpdateProduct(res.data))
+            dispatch(actFetchProductsRequest())
         });
     };
 }

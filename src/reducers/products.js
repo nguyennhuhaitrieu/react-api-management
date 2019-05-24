@@ -3,6 +3,7 @@ var initialState = [];
 
 var findIndex = (products, id) => {
     var result = -1;
+    console.log()
     products.forEach((product, index) => {
         if(product.id === id) {
             result = index;
@@ -13,7 +14,7 @@ var findIndex = (products, id) => {
 
 const products = (state =initialState, action) => {
     var index = -1;
-    var { id, product } = action;
+    var { id } = action;
     switch(action.type) {
         case Types.FETCH_PRODUCTS:
             state = action.products;
@@ -24,11 +25,12 @@ const products = (state =initialState, action) => {
            return [...state];
         case Types.ADD_PRODUCTS:
             state.push(action.product);
-            return [...state];
+            return state;
         case Types.UPDATE_PRODUCT:
-            index = findIndex(state, product.id);
-            state[index] = product;
-            return [...state];
+            return state;
+        case Types.SHOW_DATA_EDIT_PRODUCTS:
+            state = action.dataProduct;
+            return state;
         default: return [...state];
     }
 };
