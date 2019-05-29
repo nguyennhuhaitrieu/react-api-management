@@ -1,5 +1,8 @@
 import * as Types from './../constants/ActionTypes';
 import callApi from './../utils/apiCaller';
+import callApiLogin from './../utils/apiCallerLogin';
+//import setAuthToken from '../auth/setAuthToken';
+import {LoginStore} from '../localStorage/localStorage';
 
 export const actFetchProductsRequest = () => {
     return (dispatch) => {
@@ -15,7 +18,6 @@ export const actFetchProducts = (products) => {
         products
     }
 }
-
 
 export const actDeleteProductsRequest = (id) => {
     return (dispatch) => {
@@ -75,5 +77,38 @@ export const actUpdateProduct = (product) => {
     return {
         type: Types.UPDATE_PRODUCT,
         product
+    }
+}
+
+export const actFetchUsersRequest = () => {
+    return (dispatch) => {
+        return callApi('users', 'GET', null).then(res =>{
+            dispatch(actFetchUsers(res.data))
+        });
+    };
+}
+
+export const actFetchUsers = (users) => {
+    return {
+        type: Types.FETCH_USERS,
+        users
+    }
+}
+
+export const actLoginRequest = user => {
+    return (dispatch) => {
+        return callApiLogin('login', 'post', user).then(res =>{
+            const { token } = res.data;
+            console.log(token);
+            LoginStore.setData('jwtToken', token);
+            dispatch(actLogin(res.data));
+        });
+    };
+}
+
+export const actLogin = user => {
+    return {
+        type: Types.LOGIN,
+        user
     }
 }

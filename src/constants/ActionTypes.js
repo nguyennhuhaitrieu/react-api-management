@@ -3,3 +3,5 @@ export const ADD_PRODUCTS = "ADD_PRODUCTS";
 export const SHOW_DATA_EDIT_PRODUCTS = "SHOW_DATA_EDIT_PRODUCTS";
 export const UPDATE_PRODUCT = "UPDATE_PRODUCT";
 export const DELETE_PRODUCTS = "EDIT_PRODUCTS";
+export const FETCH_USERS = "FETCH_USERS";
+export const LOGIN = "LOGIN";

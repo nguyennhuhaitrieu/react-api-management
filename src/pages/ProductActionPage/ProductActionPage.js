@@ -51,6 +51,7 @@ class ProductActionPage extends Component {
 
     onSave = (event) => {
         var {txtName, txtPrice, chkbStatus , id} = this.state;
+        console.log(this.state);
         var { history } = this.props;
         //console.log(this.state);
 

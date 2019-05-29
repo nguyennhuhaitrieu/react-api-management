@@ -12,6 +12,16 @@ const menus = [
         to: '/product-list',
         exact: false
     },
+    {
+        name: 'Quản lí user',
+        to: '/user-list',
+        exact: false
+    },
+    {
+        name: 'Login',
+        to: '/login',
+        exact: false
+    },
 ];
 
 const Menulink = ({label, to, activeOnlyWhenExact}) => {
